@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Shooting-Star CSS</title>
+    <link rel="stylesheet" href="shooting-star.min.css">
+    <style>
+        :root {
+            --width-content-lg: 1024px;
+        }
+
+        .menu {
+            border-right: #7b8994 solid 1px;
+        }
+
+        .bg-red {
+            background-color: red;
+            color: white;
+        }
+
+        .bg-blue {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<header class="fixed">
+    <h1>Shooting-Star CSS</h1>
+</header>
+<div class="wrapper">
+    <header class="hide"><h1>Shooting-Star CSS</h1></header>
+    <div class="cols">
+        <div class="col-lg-auto menu col-sm-0 hide-sm">
+            <ul>
+                <li><a href="./shooting-star.min.css">・Download</a></li>
+            </ul>
+            <div class="center-h">
+                <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-fe.amazon-adsystem.com/e/cm?ref=tf_til&t=terushu.jp-22&m=amazon&o=9&p=8&l=as1&IS2=1&detail=1&asins=4774198110&linkId=9edc9b1ea813aa7ba04e6bb518561ac3&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr">
+                </iframe>
+            </div>
+        </div>
+        <div class="col-lg-9 col-sm-12">
+            <div id="概要">
+                <h2>概要</h2>
+                <p>
+                    Shooting-Star CSSは軽量のレスポンシブCSSフレームワークです。<br>
+                    主にレイアウトに重点を置いて対応しています。
+                </p>
+            </div>
+            <div id="導入方法">
+                <h2>導入方法</h2>
+                <p>
+                    利用するhtmlのhaedタグ内に下記を埋め込んで下さい。
+                </p>
+                <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/shooting-star.min.css&quot;&gt;</code></pre>
+            </div>
+            <div id="レスポンシブ">
+                <h2>レスポンシブ</h2>
+                <p>
+                    Shooting-Star CSSでは、下記の3つのパターンでレイアウトの分割方法を変更します。
+                </p>
+                <ul>
+                    <li>横が0-480px</li>
+                    <li>横が481-999px</li>
+                    <li>横が1000px以上</li>
+                </ul>
+                <p>
+                    クラス名の中で明示する場合、それぞれ<b>sm</b>, <b>md</b>, <b>lg</b>というプレフィクスを用います。<br>
+                </p>
+                <p>
+                    クラス内でlgのみ指定した場合、mdの状態でもその値が適用されます。<br>
+                    二段階でレスポンシブ切り替えを行う場合は、smとlgのみ使い分けて下さい。<br>
+                </p>
+                <p>特定の分割方法で要素を非表示にしたい場合、class="hide-sm", "hide-md", "hide-lg"が利用できます。</p>
+                <div class="margin hide-md bg-blue">
+                    ここはmdの時だけ非表示になります。
+                </div>
+                <p>特定の分割方法でのみ要素を表示したい場合、class="only-sm", "only-md", "only-lg"が利用できます。</p>
+                <div class="margin only-md bg-blue">
+                    ここはmdの時だけ表示されます。
+                </div>
+            </div>
+            <div id="全体構成">
+                <h2>全体構成</h2>
+                <p>
+                    class="wrapper"のdivタグで囲んだ部分にメインコンテンツを表示します。
+                </p>
+                <p>
+                    PCやタブレットの場合は一定幅で左右に余白ができます。<br>
+                    分割方法がlgの場合、このページは横1024pxで固定されています。
+                </p>
+                <p>
+                    スマートフォンでは左右に余白を作らず、100%で表示します。
+                </p>
+            </div>
+            <div id="自動マージンについて">
+                <h2>自動マージンについて</h2>
+                <p>
+                    spanを除くテキストを囲む系のタグ（h1, p, ui, pre等）は基本的に一定のmarginが設定されています。<br>
+                </p>
+                <div class="margin">
+                    <p class="bg-blue inline">ほげ</p>
+                    <p class="bg-red inline">ほげ</p>
+                </div>
+                <p>
+                    明示的にmarginをつけたくない場合は、class="no-margin"を指定して下さい。
+                </p>
+                <div class="margin" style="font-size: 0">
+                    <span class="bg-blue no-margin">ほげ</span>
+                    <span class="bg-red no-margin">ほげ</span>
+                </div>
+                <p>
+                    横方向だけmarginをなくしたい場合は、class="no-h-margin"、縦方向だけmarginをなくしたい場合はclass="no-v-margin"が利用できます。
+                </p>
+                <p>逆に要素に一定のmarginをつけたい場合は、class="margin"を指定できます。</p>
+                <p>同様に、class="padding", "no-padding", "no-h-padding", "no-v-padding"も存在します。</p>
+            </div>
+            <div id="横方向の分割">
+                <h2>横方向の分割</h2>
+                <p>
+                    横方向にレイアウトを分割したい場合、まずclass="cols"のdivタグを作成します。<br>
+                    さらにその中にclass="col-[分割方法]-[数値]"のdivタグを作成します。<br>
+                </p>
+                <p>
+                    数値の合計が12になる場合に横幅が100%となります。<br>
+                    分割方法を指定しない場合は画面サイズに関わらずその比率となります。<br>
+                    指定した分割方法となった場合、1:1となります。<br>
+                </p>
+                <p>
+                    以下の例では、分割方法がlgの場合、1:1:2のレイアウトを作成しています。
+                    それ以外の場合では、1:1:10となります。
+                </p>
+                <ul>
+                    <li>
+                        class="cols"
+                        <ul>
+                            <li>class="col-lg-3 col-1"</li>
+                            <li>class="col-lg-3 col-1"</li>
+                            <li>class="col-lg-6 col-10"</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="cols padding">
+                    <div class="col-lg-3 col-1 bg-red">&nbsp;</div>
+                    <div class="col-lg-3 col-1 bg-blue">&nbsp;</div>
+                    <div class="col-lg-6 col-10 bg-red">&nbsp;</div>
+                </div>
+                <p>
+                    指定した数値の合計が12を超える場合は折り返されます。
+                </p>
+                <ul>
+                    <li>
+                        class="cols"
+                        <ul>
+                            <li>class="col-6"</li>
+                            <li>class="col-6"</li>
+                            <li>class="col-6"</li>
+                            <li>class="col-3"</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="cols padding">
+                    <div class="col-6 bg-red">&nbsp;</div>
+                    <div class="col-6 bg-blue">&nbsp;</div>
+                    <div class="col-6 bg-blue">&nbsp;</div>
+                    <div class="col-3 bg-red">&nbsp;</div>
+                </div>
+                <p>
+                    数値の代わりにautoを指定する事もでき、この場合は残りの横幅となります。<br>
+                </p>
+                <ul>
+                    <li>
+                        class="cols"
+                        <ul>
+                            <li>class="col-auto"</li>
+                            <li>class="col-3"</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="cols padding">
+                    <div class="col-auto bg-red">&nbsp;</div>
+                    <div class="col-3 bg-blue">&nbsp;</div>
+                </div>
+                <p>
+                    colのみ指定して、自分で横幅を設定する事もできます。<br>
+                </p>
+                <ul>
+                    <li>
+                        class="cols"
+                        <ul>
+                            <li>class="col-auto"</li>
+                            <li>class="col" width: 32px</li>
+                            <li>class="col" width: 32px</li>
+                            <li>class="col-2"</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="cols padding">
+                    <div class="col-auto bg-red">&nbsp;</div>
+                    <div class="col bg-blue" style="width: 32px;">&nbsp;</div>
+                    <div class="col bg-red" style="width: 32px;">&nbsp;</div>
+                    <div class="col-2 bg-blue">&nbsp;</div>
+                </div>
+            </div>
+            <div id="縦方向の分割">
+                <h2>縦方向の分割</h2>
+                <p>
+                    縦方向にレイアウトを分割したい場合、まずclass="rows"のdivタグを作成します。<br>
+                    さらにその中にclass="row-[分割方法]-[数値]"のdivタグを作成します。<br>
+                    数値の合計が12になる場合に縦幅が100%となります。<br>
+                    分割方法を指定しない場合は画面サイズに関わらずその比率となります。<br>
+                    指定した分割方法となった場合、1:1となります。<br>
+                </p>
+                <p>
+                    以下の例では、分割方法がlgの場合、1:1:2のレイアウトを作成しています。
+                    それ以外の場合では、1:1:10となります。
+                </p>
+                <ul>
+                    <li>
+                        class="rows" height: 320px
+                        <ul>
+                            <li>class="row-lg-3 col-1"</li>
+                            <li>class="row-lg-3 col-1"</li>
+                            <li>class="row-lg-6 col-10"</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="rows padding" style="height: 320px;">
+                    <div class="row-lg-3 row-1 bg-red">&nbsp;</div>
+                    <div class="row-lg-3 row-1 bg-blue">&nbsp;</div>
+                    <div class="row-lg-6 row-10 bg-red">&nbsp;</div>
+                </div>
+                <p>
+                    その他、row-auto等、col系と基本的には同じです。
+                </p>
+            </div>
+            <div id="上下左右寄せ">
+                <h2>上下左右寄せ</h2>
+                <p>div要素内で上下左右に寄せたい場合は、それぞれclass="top", "bottom", "left", "right"を指定します。</p>
+                <h3>右寄せ（right）</h3>
+                <div class="cols center-h full-width">
+                    <div class="col-4 right bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+                <h3>左寄せ（left）</h3>
+                <div class="cols center-h full-width">
+                    <div class="col-4 left bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+                <h3>上寄せ（top）</h3>
+                <div class="cols center-h full-width">
+                    <div class="col-4 top bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+                <h3>下寄せ（bottom）</h3>
+                <div class="cols center-h full-width">
+                    <div class="col-4 bottom bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+                <p>右下寄せを行いたい場合は、bottomとrightを両方指定して下さい。</p>
+                <div class="cols">
+                    <div class="col-4"></div>
+                    <div class="col-4 bottom right bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+            </div>
+            <div id="センタリング">
+                <h2>センタリング</h2>
+                <p>
+                    div要素内を横方向にセンタリングするには、class="center-h"を指定します。
+                </p>
+                <div class="cols center-h full-width">
+                    <div class="col-4 center-h bg-blue">
+                        ほげ
+                    </div>
+                </div>
+                <p>
+                    div要素内を縦方向にセンタリングするには、class="center-v"を指定します。<br>
+                </p>
+                <div class="cols center-h full-width">
+                    <div class="col-4 center-v bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+                <p>
+                    縦方向と横方向に完全にセンタリングするためには、center-vとcenter-hを両方指定して下さい。
+                </p>
+                <div class="cols center-h full-width">
+                    <div class="col-4 center-v center-h bg-blue" style="height: 60px;">
+                        ほげ
+                    </div>
+                </div>
+            </div>
+            <div id="重ね合わせ">
+                <h2>重ね合わせ</h2>
+                <p>重ね合わせは親のdivにclass="layers"を指定し、子のdivにclass="layer"を指定して下さい。</p>
+                <p>位置や大きさはstyleのtopやwidthで指定します。</p>
+                <ul>
+                    <li>class="layers" width: 64px;height: 64px</li>
+                    <li>
+                        <ul>
+                            <li>class="layer" width: 32px;height: 32px</li>
+                            <li>class="layer" width: 32px;height: 32px;top: 32px;left: 32px</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="margin layers bg-blue" style="width: 64px; height: 64px;">
+                    <div class="layer bg-red" style="width: 32px; height: 32px">1</div>
+                    <div class="layer bg-red" style="width: 32px; height: 32px; top: 32px; left: 32px;">2</div>
+                </div>
+            </div>
+            <div id="ヘッダー">
+                <h2>ヘッダー</h2>
+                <p>headerタグを利用すると、上部に表示されるヘッダー部分となります。</p>
+                <div class="margin bg-blue" style="height: 200px;">
+                    <header>ヘッダー</header>
+                    <p>コンテンツ</p>
+                </div>
+                <p>
+                    headerタグにclass="fixed"をつけると、スクロールしてもウィンドウ上部に固定されたヘッダが作成できます。<br>このページのヘッダーがそうです。<br>
+                    ただし、コンテンツ上部が隠れてしまうため、class="wrapper"のdiv内先頭にclass="hide"指定をした全く同じ子要素を持つheaderタグを挿入して下さい。
+                </p>
+            </div>
+            <div id="フッター">
+                <h2>フッター</h2>
+                <p>footerタグを利用すると、下部に表示されるフッター部分となります。ただし、単純にデザインだけです。</p>
+                <div class="margin bg-red" style="height: 200px;">
+                    <div class="bg-blue" style="height: 64px;">
+                        <p>コンテンツ高さ64px</p>
+                    </div>
+                    <footer>フッター</footer>
+                    <p>全体高さ200px</p>
+                </div>
+                <p>
+                    headerタグにclass="fixed"をつけると、スクロールしてもウィンドウ下部に固定されたヘッダが作成できます。<br>このページのフッターがそうです。
+                    ただし、場合によってはコンテンツ下部が隠れてしまうため、class="wrapper"のdiv内末尾にclass="hide"指定をした全く同じ子要素を持つfooterタグを挿入して下さい。
+                </p>
+            </div>
+            <div id="フォーム">
+                <h2>フォーム</h2>
+                <p>
+                    formクラス内に各種inputタグやbuttonタグの適当なスタイルが適用されます。<br>
+                    基本的には自分でカスタムする部分です。
+                </p>
+                <div class="margin form">
+                    <label>
+                        テキスト
+                        <input type="text" name="text" value="">
+                    </label>
+                    <p></p>
+                    <label>
+                        チェックボックス
+                        <input type="checkbox" name="checkbox" checked>
+                    </label>
+                    <p></p>
+                    <input type="button" value="inputボタン">
+                    <p></p>
+                    <button>ボタン</button>
+                    <p></p>
+                    <input type="submit" value="送信" onclick="return false;">
+                </div>
+            </div>
+        </div>
+        <footer class="hide">
+            <div class="right">
+                <p>(C)2018- S.Teruyama</p>
+            </div>
+        </footer>
+    </div>
+    <footer class="fixed">
+        <div class="right">
+            <p>(C)2018- S.Teruyama</p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
